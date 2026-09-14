@@ -603,13 +603,12 @@ body.expanded .more, html:not(.js) .more{ display:block; }
   z-index:40;
   display:inline-flex; flex-direction:column; align-items:center; gap:8px;
   padding:13px 24px 11px;
-  border:1px solid var(--hair); border-radius:999px;
-  background:rgba(251,248,244,.82);
-  backdrop-filter:blur(4px);
-  box-shadow:0 10px 24px -18px rgba(69,58,48,.55);
+  border:0; border-radius:999px;
+  background:linear-gradient(135deg, #9DB8CD 0%, #B9AEC4 52%, #D8A3A8 100%);
+  box-shadow:0 12px 26px -12px rgba(110,143,168,.7), 0 2px 0 rgba(255,255,255,.3) inset;
   font-family:'Lato','Helvetica Neue',Helvetica,Arial,sans-serif;
   font-size:9.5px; font-weight:700; letter-spacing:.3em; text-transform:uppercase;
-  color:var(--ink-soft); text-decoration:none;
+  color:#FFFFFF; text-decoration:none;
   white-space:nowrap;
   cursor:pointer;
   opacity:0; pointer-events:none;
@@ -636,14 +635,25 @@ body.expanded .scrollrail, html:not(.js) .scrollrail{ opacity:1; }
   transition:transform .1s linear;
 }
 .scrollcue:hover{
-  color:var(--ink); border-color:var(--ink-faint);
   transform:translateX(-50%) translateY(-3px);
-  box-shadow:0 14px 28px -18px rgba(69,58,48,.6);
+  box-shadow:0 16px 30px -12px rgba(110,143,168,.8), 0 2px 0 rgba(255,255,255,.35) inset;
+  filter:brightness(1.05);
+}
+/* a soft halo, so the eye finds it */
+.scrollcue::after{
+  content:""; position:absolute; inset:0; border-radius:inherit;
+  pointer-events:none;
+  animation:halo 2.6s ease-out infinite;
+}
+@keyframes halo{
+  0%   { box-shadow:0 0 0 0 rgba(157,184,205,.55); }
+  70%  { box-shadow:0 0 0 16px rgba(157,184,205,0); }
+  100% { box-shadow:0 0 0 0 rgba(157,184,205,0); }
 }
 .scrollcue:focus-visible{ outline:2px solid var(--sage-deep); outline-offset:4px; }
 .scrollcue svg{ width:14px; height:auto; display:block; }
-@keyframes nudge{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(5px) } }
-.scrollcue svg{ animation:nudge 2.4s ease-in-out infinite; }
+@keyframes arrowzoom{ 0%,100%{ transform:scale(1) } 50%{ transform:scale(1.3) translateY(2px) } }
+.scrollcue svg{ animation:arrowzoom 1.8s ease-in-out infinite; }
 html{ scroll-behavior:smooth; }
 
 .chapter{
@@ -1487,9 +1497,16 @@ html:not(.js) .up{ opacity:1; transform:none; }
   /* ---- the cue steps aside once you are reading; the rail tracks you ---- */
   var cueEl  = document.getElementById('scrollcue');
   var railEl = document.getElementById('railfill');
+  var moreSection = document.getElementById('more');
   function onScroll(){
     var y = window.scrollY || document.documentElement.scrollTop || 0;
-    document.body.classList.toggle('scrolled', y > 40);
+    /* the cue belongs to the letter — it only steps aside once the next
+       section has taken over the lower half of the screen */
+    var arriving = false;
+    if (moreSection && moreSection.offsetParent !== null){
+      arriving = moreSection.getBoundingClientRect().top < innerHeight * 0.5;
+    }
+    document.body.classList.toggle('scrolled', arriving);
     if (railEl){
       var max = document.documentElement.scrollHeight - innerHeight;
       railEl.style.transform = 'scaleY(' + (max > 4 ? Math.min(1, y/max) : 0) + ')';
