@@ -582,6 +582,68 @@ html.js .reveal{ opacity:0; transform:translateY(11px); }
 }
 
 /* very small phones */
+/* ---- fit the whole letter on one phone screen ----
+   The card was 968px against roughly 740px of usable height, so the When and
+   Where details fell below the fold and the arrow jumped straight past them.
+   Everything below is trimmed to bring the letter inside one screen. ---- */
+@media (max-width:1060px){
+  html:not(.js) .stage, body.flow .stage{ padding:10px 12px 18px; }
+  html:not(.js) .card-inner, body.flow .card-inner{ padding:28px 22px 28px; }
+
+  html:not(.js) .frame, body.flow .frame{
+    width:165px; height:145px;
+    border-radius:78px 78px 4px 4px / 37px 37px 4px 4px;
+  }
+  html:not(.js) .frame::after, body.flow .frame::after{
+    box-shadow:
+      0 0 0 10px #FFFFFF,
+      0 0 0 11px rgba(168,184,154,.34),
+      0 12px 22px -14px rgba(69,58,48,.34);
+  }
+  html:not(.js) .portrait figcaption, body.flow .portrait figcaption{ margin-top:10px; }
+  html:not(.js) .portrait .cap, body.flow .portrait .cap{ font-size:14.5px; }
+
+  html:not(.js) .teddies, body.flow .teddies{ width:122px; margin-top:6px; }
+  html:not(.js) .teddyhint, body.flow .teddyhint{ font-size:8px; letter-spacing:.24em; }
+
+  html:not(.js) .top, body.flow .top{ gap:10px; }
+  html:not(.js) .eyebrow, body.flow .eyebrow{ font-size:9px; margin:0 0 8px; }
+  html:not(.js) h1, body.flow h1{ font-size:clamp(38px,13vw,52px); }
+  html:not(.js) .honouring, body.flow .honouring{ margin:10px 0 6px; }
+  html:not(.js) .honouring span, body.flow .honouring span{ font-size:15px; }
+  html:not(.js) .names, body.flow .names{ font-size:23px; }
+  html:not(.js) .sprig, body.flow .sprig{ margin:8px auto 12px; width:76px; }
+
+  html:not(.js) .facts, body.flow .facts{ gap:13px; }
+  html:not(.js) .fact dd, body.flow .fact dd{ font-size:17px; max-width:280px; }
+  html:not(.js) .fact dd small, body.flow .fact dd small{ font-size:11px; margin-top:3px; }
+  html:not(.js) .fact dt, body.flow .fact dt{ font-size:8.5px; }
+}
+
+/* shorter phones (and Safari with its chrome showing) need a little more off */
+@media (max-width:1060px) and (max-height:700px){
+  html:not(.js) .card-inner, body.flow .card-inner{ padding:22px 20px 22px; }
+  html:not(.js) .frame, body.flow .frame{
+    width:138px; height:121px;
+    border-radius:66px 66px 4px 4px / 31px 31px 4px 4px;
+  }
+  html:not(.js) .frame::after, body.flow .frame::after{
+    box-shadow:0 0 0 8px #FFFFFF, 0 0 0 9px rgba(168,184,154,.34),
+               0 10px 18px -12px rgba(69,58,48,.34);
+  }
+  html:not(.js) .portrait figcaption, body.flow .portrait figcaption{ margin-top:8px; }
+  html:not(.js) .portrait .cap, body.flow .portrait .cap{ font-size:13px; }
+  html:not(.js) .teddies, body.flow .teddies{ width:104px; margin-top:4px; }
+  html:not(.js) .top, body.flow .top{ gap:7px; }
+  html:not(.js) h1, body.flow h1{ font-size:clamp(34px,11.5vw,44px); }
+  html:not(.js) .honouring, body.flow .honouring{ margin:7px 0 4px; }
+  html:not(.js) .names, body.flow .names{ font-size:21px; }
+  html:not(.js) .sprig, body.flow .sprig{ margin:6px auto 9px; width:68px; }
+  html:not(.js) .facts, body.flow .facts{ gap:10px; }
+  html:not(.js) .fact dd, body.flow .fact dd{ font-size:16px; }
+  html:not(.js) .fact dd small, body.flow .fact dd small{ font-size:10.5px; }
+}
+
 @media (max-width:360px){
   body.flow .card-inner, html:not(.js) .card-inner{ padding:32px 18px 40px; }
   body.flow .teams, html:not(.js) .teams{ margin:22px -18px 0; }
