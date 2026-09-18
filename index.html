@@ -815,6 +815,18 @@ html:not(.js) .up{ opacity:1; transform:none; }
 .pick[aria-pressed="true"]{ border-color:transparent; }
 .pick[aria-pressed="true"] .fillwash{ opacity:.85; }
 .pick[aria-pressed="true"] .s{ color:var(--ink-soft); }
+.dresscode{
+  display:flex; flex-direction:column; align-items:center; gap:5px;
+  margin:20px 0 0;
+}
+.dresscode span{
+  font-size:9.5px; font-weight:700; letter-spacing:.32em; text-transform:uppercase;
+  color:var(--ink-faint);
+}
+.dresscode{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:22px; font-weight:500; color:var(--ink); letter-spacing:.02em;
+}
 .pickmsg{
   min-height:26px;
   font-family:'Cormorant Garamond',Georgia,serif; font-style:italic;
@@ -1263,7 +1275,8 @@ html:not(.js) .up{ opacity:1; transform:none; }
     <div class="deco" aria-hidden="true"><i class="d-c"></i></div>
     <p class="kicker up">Blue or pink</p>
     <h2 id="tp-h" class="up d1">What's your guess?</h2>
-    <p class="lede up d2">We're keeping it a surprise — even from ourselves. Pick a side, then wear it on the day.</p>
+    <p class="lede up d2">We're keeping it a surprise. Pick a side, then wear it on the day.</p>
+    <p class="dresscode up d2"><span>Dress code</span>Smart casual</p>
 
     <div class="picker up d3">
       <button class="pick" id="pick-blue" type="button" aria-pressed="false" data-team="blue"
